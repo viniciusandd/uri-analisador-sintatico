@@ -8,7 +8,7 @@
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="{{ url_for('webui.static', filename='style.css') }}"></link>
+    <link rel="stylesheet" href="{{ url_for('web.static', filename='style.css') }}"></link>
 </head>
 <body>
 
@@ -100,8 +100,8 @@
                         <input type="text" class="form-control" id="sentenca" placeholder="Digite uma sentença...">
                         <small class="form-text text-muted">Digite uma sentença de forma manual ou selecione ela através da tabela de parsing.</small>
                     </div>
-                    <button type="button" class="btn btn-primary">Execução por linha</button>
-                    <button type="button" class="btn btn-secondary">Execução completa</button>
+                    <button id="btn-execucao-linha" type="button" class="btn btn-primary">Execução por linha</button>
+                    <button id="btn-execucao-completa" type="button" class="btn btn-secondary">Execução completa</button>
                 </form>                
             </div>
         </div>
@@ -126,7 +126,7 @@
     <script type=text/javascript>
         $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
-    <script src="{{ url_for('webui.static', filename='script.js') }}"></script>
+    <script src="{{ url_for('web.static', filename='script.js') }}"></script>
 </body>
 
 <footer class="text-center">
