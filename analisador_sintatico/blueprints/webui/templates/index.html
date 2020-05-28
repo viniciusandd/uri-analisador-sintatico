@@ -5,13 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Analisador Sintático</title>
-
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('webui.static', filename='style.css') }}"></link>
 </head>
 <body>
 
-    <button id="botao" type="button" class="btn btn-primary">Primary</button>
+    <div class="container text-center">
+        <h4>Gramática e conjuntos first e follow</h4>
+        <div class="row">                                
+            <table class="table table-bordered table-dark">
+                <tbody>
+                    <tr>
+                        <td>S ::= aAb</td>
+                        <td>FIRST(S) = {a}</td>
+                        <td>FOLLOW(S) = {$}</td>
+                    </tr>
+                    <tr>
+                        <td>A ::= aBc | dC</td>
+                        <td>FIRST(A)={a, d}</td>
+                        <td>FOLLOW(A)={b, c}</td>
+                    </tr>
+                    <tr>
+                        <td>B ::= bC | &</td>
+                        <td>FIRST(B)={b, &}</td>
+                        <td>FOLLOW(B)={c}</td>
+                    </tr>
+                    <tr>
+                        <td>C ::= dA | c</td>
+                        <td>FIRST(C)={d, c}</td>
+                        <td>FOLLOW(C)={b, c}</td>
+                    </tr>
+                </tbody>
+            </table>            
+        </div>
+    </div>
+
+    <div class="container-fluid">        
+        <div class="row">
+            <div class="col-md-6 text-center">
+                <h4>Tabela de parsing</h4>
+                <table id="tabela-parsing" class="table table-bordered table-dark">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">a</th>
+                            <th scope="col">b</th>
+                            <th scope="col">c</th>
+                            <th scope="col">d</th>
+                            <th scope="col">$</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">S</th>
+                            <td>S -> aAb</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">A</th>
+                            <td>A -> aBc</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>A -> dC</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">B</th>
+                            <td>-</td>
+                            <td>B -> bC</td>
+                            <td>B -> &</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">C</th>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>C -> c</td>
+                            <td>C -> dA</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>             
+            </div>
+            <div class="col-md-6 text-center">
+                <h4>Sentença</h4>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="sentenca" placeholder="Digite uma sentença...">
+                        <small class="form-text text-muted">Digite uma sentença de forma manual ou selecione ela através da tabela de parsing.</small>
+                    </div>
+                    <button type="button" class="btn btn-primary">Execução por linha</button>
+                    <button type="button" class="btn btn-secondary">Execução completa</button>
+                </form>                
+            </div>
+        </div>
+
+        <div class="col-md-12 text-center">
+            <h4>Analisador Sintático Top-Down</h4>
+            <table id="analisador-top-down" class="table table-bordered table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">Pilha</th>
+                        <th scope="col">Entrada</th>
+                        <th scope="col">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>                        
+        </div>
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script type=text/javascript>
@@ -19,4 +128,9 @@
     </script>
     <script src="{{ url_for('webui.static', filename='script.js') }}"></script>
 </body>
+
+<footer class="text-center">
+    <p>&copy; <a href="https://github.com/viniciusandd" target="__blank">Vinicius Emanoel Andrade</a> - 2020</p>
+</footer>  
+
 </html>
