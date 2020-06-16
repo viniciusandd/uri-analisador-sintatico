@@ -8,4 +8,4 @@ class AnalisadorSintatico(Resource):
         parser = retornar_parser()
         args = parser.parse_args()
         sentenca = args['sentenca']        
-        return jsonify({"msg": sentenca})
+        
