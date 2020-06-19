@@ -1,5 +1,3 @@
-from flask import session
-
 class Auxiliar:
     def conteudo_to_string(self):
         return ''.join(self.conteudo)      
