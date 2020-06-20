@@ -13,18 +13,17 @@ class AnalisadorSintatico(Resource):
         pilha = Pilha()
         entrada = Entrada(sentenca)
         tabela_parsing = TabelaDeParsing()
-        automato = Automato()
+        automato = Automato(pilha, entrada)
         
-        iteracoes = 0
-        acao = None
-        while not acao == 'ACEITA':
+        while True:
             acao = tabela_parsing.acao(pilha.topo(), entrada.inicio())
+            automato.adicionar_linha(acao)
             if acao == "DESEMPILHAR_E_LER":
                 pilha.desempilhar()
                 entrada.ler()
             elif acao and acao != "ACEITA":
-                pilha.modificar_topo(acao)                
-            iteracoes = iteracoes + 1
-            automato.adicionar_linha(pilha, entrada, acao)
-            
+                pilha.modificar_topo(acao)
+            else:
+                break
+                        
         return jsonify(automato.tabela)

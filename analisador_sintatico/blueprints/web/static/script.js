@@ -20,13 +20,14 @@ const iniciarDataTable = function() {
 const botaoExecucaoCompleta = function(dataTable) {
     $('#btn-execucao-completa').click(function (e) { 
         e.preventDefault();
+        dataTable.clear();
         const sentenca = $('#sentenca').val();
         const url = `${$SCRIPT_ROOT}/api/analisador_sintatico?sentenca=${sentenca}`;   
         $.ajax({
             url: url,
             method: "get",
             dataType: "json",
-            success: function(automato) { dataTable.rows.add(automato).draw(); }
+            success: function(automato) { dataTable.rows.add(automato).draw();  }
         });
     });
 }

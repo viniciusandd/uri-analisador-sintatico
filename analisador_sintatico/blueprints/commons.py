@@ -69,13 +69,25 @@ class Entrada(Auxiliar):
         self.conteudo.pop(0)
 
 class Automato:
-    def __init__(self):
+    def __init__(self, pilha: Pilha, entrada: Entrada):
         self.tabela = []
+        self.pilha = pilha
+        self.entrada = entrada
 
-    def adicionar_linha(self, pilha: Pilha, entrada: Entrada, acao: str):
+    def mensagens(self, acao):
+        if acao == "DESEMPILHAR_E_LER":
+            return "Desempilhar e ler %s" % self.pilha.topo()
+        elif acao == "ACEITA":
+            return f"Aceita em {len(self.tabela) + 1} iterações"
+        elif not acao:
+            return f"Erro em {len(self.tabela) + 1} iterações. O símbolo não pode ser produzido."
+        else:
+            return "%s -> %s" % (self.pilha.topo(), acao)
+
+    def adicionar_linha(self, acao):
         linha = {
-            "pilha": pilha.conteudo_to_string(),
-            "entrada": entrada.conteudo_to_string(),
-            "acao": acao
+            "pilha": self.pilha.conteudo_to_string(),
+            "entrada": self.entrada.conteudo_to_string(),
+            "acao": self.mensagens(acao)
         }
         self.tabela.append(linha)
