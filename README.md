@@ -1,6 +1,6 @@
 # Analisador Sintático Top-Down Preditivo Tabular
 
-O projeto consiste é uma implementação de um analisador sintático.
+O projeto é uma implementação de um analisador sintático.
 
 ## Como executar
 
