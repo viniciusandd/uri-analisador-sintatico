@@ -43,7 +43,7 @@ python3 -m venv venv
 Ative-o e instale as dependências do projeto.
 
 ```
-source venv/bin/active
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
