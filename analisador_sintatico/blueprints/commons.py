@@ -70,8 +70,12 @@ class TabelaDeParsing:
         if char1 == char2:
             if char1 == "$":
                 return "ACEITA"
-            return "DESEMPILHAR_E_LER"
-        return self.conteudo[char1, char2]
+            return "DESEMPILHAR_E_LER"        
+        try:
+            producao = self.conteudo[char1, char2]
+            return producao
+        except:
+            return None        
 
     def buscar_producoes(self, terminal):
         producoes = []
@@ -122,7 +126,7 @@ class Automato:
         elif acao == "ACEITA":
             return f"Aceita em {len(self.tabela) + 1} iterações"
         elif not acao:
-            return f"Erro em {len(self.tabela) + 1} iterações. O símbolo não pode ser produzido."
+            return f"Erro em {len(self.tabela) + 1} iterações."
         else:
             return "%s -> %s" % (self.pilha.topo(), acao)
 
