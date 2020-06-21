@@ -41,6 +41,8 @@ const botaoExecucaoCompleta = function(dataTable) {
             dataTable.rows.add(automato).draw(); 
             $(document).scrollTop($(document).height());
             $('#btn-voltar-topo').show().focus();
+        }).fail(function(xhr) {
+            bootbox.alert(xhr.responseJSON.erro);
         });
     });
 }
@@ -70,6 +72,8 @@ const botaoProximaLinha = function(dataTable) {
                 globalAutomato = automato;
                 dataTable.row.add(globalAutomato[0]).draw();
                 botao.prop("disabled", false);
+            }).fail(function(xhr) {
+                bootbox.alert(xhr.responseJSON.erro);
             });
         } else {
             if (contadorDeClicks < globalAutomato.length)

@@ -10,6 +10,11 @@ class AnalisadorSintatico(Resource):
         args = parser.parse_args()
         sentenca = args['sentenca']        
         
+        if len(sentenca) == 0:
+            resposta = jsonify({"erro": "A sentença não pode ser vazia."})
+            resposta.status_code = 400
+            return resposta
+
         pilha = Pilha()
         entrada = Entrada(sentenca)
         tabela_parsing = TabelaDeParsing()
