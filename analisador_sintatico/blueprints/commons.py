@@ -1,6 +1,40 @@
+import random
+
 class Auxiliar:
     def conteudo_to_string(self):
         return ''.join(self.conteudo)      
+
+class Sentenca(Auxiliar):
+    def __init__(self):
+        self.conteudo = ['a', 'A', 'b']
+    
+    def localizar_nao_terminal(self):
+        for producao in self.conteudo:
+            if len(producao) == 1:
+                if producao.isupper():
+                    return producao
+            else:
+                for char in producao:
+                    if char.isupper():
+                        return producao
+        return None
+
+    def gerar(self):
+        tabela_parsing = TabelaDeParsing()
+        while True:
+            nao_terminal = self.localizar_nao_terminal()
+            if not nao_terminal:
+                break
+            producoes = tabela_parsing.buscar_producoes(nao_terminal)
+            producao = producoes[0] if len(producoes) == 1 else producoes[random.randint(0, len(producoes)-1)]
+            index = self.conteudo.index(nao_terminal)
+            if producao != '&':
+                self.conteudo[index] = producao
+                string_conteudo = self.conteudo_to_string()
+                self.conteudo = list(string_conteudo)      
+            else:
+                self.conteudo.remove(nao_terminal)
+        return self.conteudo_to_string()
 
 class TabelaDeParsing:
     def __init__(self):
@@ -31,13 +65,21 @@ class TabelaDeParsing:
         self.conteudo["C","c"] = "c"
         self.conteudo["C","d"] = "dA"
         self.conteudo["C","$"] = None                     
-                
+
     def acao(self, char1, char2):
         if char1 == char2:
             if char1 == "$":
                 return "ACEITA"
             return "DESEMPILHAR_E_LER"
         return self.conteudo[char1, char2]
+
+    def buscar_producoes(self, terminal):
+        producoes = []
+        for producao in self.conteudo:
+            if producao[0] == terminal:
+                if self.conteudo[producao]:
+                    producoes.append(self.conteudo[producao])
+        return producoes
 
 class Pilha(Auxiliar):
     def __init__(self):

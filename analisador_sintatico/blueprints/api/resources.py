@@ -1,7 +1,7 @@
 from flask import jsonify
 from flask_restful import Resource
 from .parsers import retornar_parser
-from ..commons import TabelaDeParsing, Pilha, Entrada, Automato
+from ..commons import TabelaDeParsing, Pilha, Entrada, Automato, Sentenca
 
 
 class AnalisadorSintatico(Resource):
@@ -27,3 +27,9 @@ class AnalisadorSintatico(Resource):
                 break
                         
         return jsonify(automato.tabela)
+    
+class GerarSentenca(Resource):
+    def get(self):
+        sentenca = Sentenca()
+        sentenca_gerada = sentenca.gerar()
+        return jsonify({"sentenca": sentenca_gerada})
