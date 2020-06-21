@@ -12,9 +12,16 @@ O projeto está disponível em: http://viniciusandd.pythonanywhere.com
 
 ## :whale: Container
 
-Builde uma nova imagem.
+Primeiro, clone o projeto.
 
-`docker build -t analisador_sintatico .`
+`git clone https://github.com/viniciusandd/uri-analisador-sintatico.git`
+
+Entre na pasta e builde uma nova imagem.
+
+```
+cd uri-analisador-sintatico
+docker build -t analisador_sintatico .
+```
 
 Execute o container (a porta utilizada é a `8000`).
 
