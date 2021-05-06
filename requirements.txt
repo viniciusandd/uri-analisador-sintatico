@@ -4,7 +4,7 @@ cachelib==0.1
 click==7.1.2
 dynaconf==2.2.3
 Flask==1.1.2
-Flask-Cors==3.0.8
+Flask-Cors==3.0.9
 Flask-RESTful==0.3.8
 Flask-Session==0.3.2
 isort==4.3.21
